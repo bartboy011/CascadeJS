@@ -1,4 +1,8 @@
-.ripple {
+.cascade-container * {
+  display: inline-block;
+}
+
+.cascade {
     animation-fill-mode: both;
     animation-duration: 1s;
 }
