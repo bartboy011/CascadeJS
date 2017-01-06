@@ -125,3 +125,13 @@ var cascade = new Cascade(element).fragment({
   class_prefix: 'cascade char'
 });
 ```
+
+You can then call
+
+```javascript
+cascade.flow({
+  should_fragment: false
+})
+```
+
+When you're ready for some cool animations.
