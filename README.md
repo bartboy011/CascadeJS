@@ -76,7 +76,7 @@ cascade.flow({
 
 `duration:` - How long each letter's animation lasts. If you'd rather specify this in your CSS, just leave this option empty. Defaults to `null` and doesn't add this styling.
 
-`should_fragment` - If you've previously called `fragment()` on this node, set this option to false otherwise the fragmentation will run again and throw an error. Defaults to true.
+`should_fragment:` - If you've previously called `fragment()` on this node, set this option to false otherwise the fragmentation will run again and throw an error. Defaults to true.
 
 #### Example:
 
