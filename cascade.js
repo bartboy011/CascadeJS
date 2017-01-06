@@ -5,11 +5,11 @@ function Cascade (element, options) {
 
   this.set_defaults = function (options) {
     var opts             = options || {};
-    console.log(opts);
-    this.class_prefix    = opts.class_prefix || 'ripple char';
+    this.class_prefix    = opts.class_prefix || 'cascade char';
     this.tag_name        = opts.tag_name || 'span';
     this.effect          = opts.effect || 'fadeUp';
     this.total_time      = opts.total_time || 0.5;
+    this.duration        = opts.duration;
     this.should_fragment = opts.should_fragment != null ? opts.should_fragment : true;
   }.bind(this);
 
@@ -34,10 +34,14 @@ function Cascade (element, options) {
     parent.removeChild(element);
     this.element  = parent;
     this.children = parent.childNodes;
+    parent.setAttribute('data-made-with', 'CascadeJS');
   }
 
-  function animate (item, effect, time) {
-    item.style.animationDelay = time + 's';
+  function animate (item, effect, time, duration) {
+    item.style.animationDelay    = time + 's';
+    if (duration != null) {
+      item.style.animationDuration = duration + 's';
+    }
     item.className += (' ' + effect);
   }
 
@@ -51,14 +55,15 @@ function Cascade (element, options) {
     if (this.should_fragment) { this.fragment({}, false); }
 
     // iterate through spans and animate them
-    var array = this.children,
+    var array      = this.children,
         total_time = this.total_time,
-        effect = this.effect,
+        effect     = this.effect,
+        duration   = this.duration,
         i = -1;
     while (i++ < array.length - 1) {
       var item = array[i],
-          time = (total_time/array.length) * i;
-      animate(item, effect, time);
+          time = (total_time/(array.length - 1)) * i;
+      animate(item, effect, time, duration);
     }
   }.bind(this);
 
@@ -73,6 +78,8 @@ function Cascade (element, options) {
     if (should_set_defaults) {this.set_defaults(opts);}
 
     var children = this.children;
+
+    // throw some errors if elements are set up improperly
     if (children.length > 1) {
       console.error('CascadeJS Error - error in parent element:\n Please limit the amount children of this element to 1 (population control and all that).');
     } else if (children[0].nodeType !== Node.TEXT_NODE){
