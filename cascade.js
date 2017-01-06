@@ -3,14 +3,15 @@ function Cascade (element, options) {
   this.element = element; // element to segment and animate
   this.children = this.element.childNodes; // pre-segment child nodes
 
-  function set_defaults (options) {
+  this.set_defaults = function (options) {
     var opts             = options || {};
+    console.log(opts);
     this.class_prefix    = opts.class_prefix || 'ripple char';
     this.tag_name        = opts.tag_name || 'span';
     this.effect          = opts.effect || 'fadeUp';
     this.total_time      = opts.total_time || 0.5;
     this.should_fragment = opts.should_fragment != null ? opts.should_fragment : true;
-  }
+  }.bind(this);
 
   // take a string inside an element, split it, wrap them
   // in their own tags, then inject the whole thing back
@@ -43,11 +44,11 @@ function Cascade (element, options) {
   this.flow = function (options) {
     // set defaults
     var opts = options || {};
-    set_defaults(opts);
+    this.set_defaults(opts);
 
     // split the text into spans if segmentation
     // hasn't been performed yet
-    if (this.should_fragment) { this.fragment(); }
+    if (this.should_fragment) { this.fragment({}, false); }
 
     // iterate through spans and animate them
     var array = this.children,
@@ -61,10 +62,15 @@ function Cascade (element, options) {
     }
   }.bind(this);
 
-  this.fragment = function (options) {
-    // set defaults
-    var opts = options || {};
-    set_defaults(opts);
+  this.fragment = function (options, set_defaults) {
+    // set defaults only if they are being passed in from an
+    // external call, ie new Cascade.fragment(options) to prevent
+    // overwriting defaults when called internally
+    var should_set_defaults = set_defaults != null ? set_defaults : true;
+    var opts                = options || {};
+
+    // set defaults only if
+    if (should_set_defaults) {this.set_defaults(opts);}
 
     var children = this.children;
     if (children.length > 1) {
