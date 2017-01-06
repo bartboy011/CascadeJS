@@ -9,6 +9,12 @@ CascadeJS makes it simple to add cascading animations to individual letters in a
 <script type='text/javascript' src='cascade.js' />
 ```
 
+or
+
+```bash
+bower install cascadejs
+```
+
 ## Quick Start
 
 CascadeJS comes with default settings, so as long as you've included both the JS and CSS files, it will work right out of the box. Here's an example usage:
