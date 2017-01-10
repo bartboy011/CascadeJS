@@ -3,6 +3,7 @@
 
 .cascade-container * {
   display: inline-block;
+  white-space: pre;
 }
 
 .cascade {
