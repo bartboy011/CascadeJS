@@ -1,6 +1,6 @@
 # CascadeJS
 
-CascadeJS makes it simple to add cascading animations to individual letters in a string of text, using only vanilla javascript.
+CascadeJS makes it simple to add cascading animations to individual letters or elements, using only vanilla javascript.
 
 ## Installation
 
