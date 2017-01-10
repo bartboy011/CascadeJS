@@ -5,8 +5,8 @@ CascadeJS makes it simple to add cascading animations to individual letters in a
 ## Installation
 
 ```html
-<link href='stylesheet' type='text/css' href='cascade.css' />
-<script type='text/javascript' src='cascade.js' />
+<link href='stylesheet' type='text/css' href='cascade.min.css' />
+<script type='text/javascript' src='cascade.min.js' />
 ```
 
 or
@@ -23,23 +23,21 @@ CascadeJS comes with default settings, so as long as you've included both the JS
 <link href='stylesheet' type='text/css' href='cascade.css' />
 <script type='text/javascript' src='cascade.js' />
 
-<h1 class='cascade-container'>Ooooohhhh, fancy.</h1>
+<h1>Ooooohhhh, fancy.</h1>
 
 <script>
-  var element = document.getElementByClassName('cascade-container')[0];
+  var element = document.getElementsByTagName('h1')[0];
   var cascade = new Cascade(element).flow();
 </script>
 ```
 
 ## Usage
 
-CascadeJS works by reading a line of text, splitting that text into spans around each character, and then adding animations to each span (by default). The splitting is modeled after charming.js, a vanilla javasript version of Lettering.js. Cascade requires an element be passed in on initialization:
+CascadeJS works by reading a line of text, splitting that text into spans around each character, and then adding animations to each span (by default). The splitting is modeled after charming.js, a vanilla javascript version of Lettering.js. Cascade requires an element be passed in on initialization:
 
 ```javascript
 var cascade = new Cascade(element);
 ```
-
-This element must have only one child node, and that child node needs to be a text node. In plain English, don't call Cascade on a tag that has another tag nested in it.
 
 Cascade has two methods that can be called:
 
@@ -49,7 +47,7 @@ cascade.fragment();
 cascade.flow();
 ```
 
-Calling `fragment()` will only split the text without adding the animations. Calling `flow()` will first fragment the text, and then animate. I would suggest calling `flow()` whenever possible.
+Calling `fragment()` will split the text without adding the animations, and must be called on an element with only a text node for a child. Calling `flow()` will first fragment the text, and then animate all children elements in a cascade. I would suggest calling `flow()` whenever possible.
 
 ### Usage of `flow()`
 
@@ -68,7 +66,9 @@ cascade.flow({
   effect: 'fadeUp',
   total_time: 0.5,
   duration: 1,
-  should_fragment: true
+  should_fragment: true,
+  should_append_target_class: true,
+  target_class: 'cascade-container'
 });
 ```
 
@@ -84,10 +84,38 @@ cascade.flow({
 
 `should_fragment:` - If you've previously called `fragment()` on this node, set this option to false otherwise the fragmentation will run again and throw an error. Defaults to true.
 
+`should_append_target_class` - Defaults to true, will append a class to the target element after fragmenting.
+
+`target_class` - The class to be appended to the target element. Defaults to 'cascade-container'. Note: if you've already added the class to the element that you'd like appended, CascadeJS will skip the appending. Example:
+
+```html
+<!-- This element will have a class appended to it -->
+<h1 class='text-center'>Hello!</h1>
+
+<script>
+  var element = document.getElementsByTagName('h1')[0];
+  var cascade = new Cascade(element);
+  cascade.flow({
+    target_class: 'cascade-container'
+  });
+</script>
+
+<!-- This element will NOT have a class appended -->
+<h1 class='text-center cascade-container'>Hello!</h1>
+
+<script>
+  var element = document.getElementsByTagName('h1')[0];
+  var cascade = new Cascade(element);
+  cascade.flow({
+    target_class: 'cascade-container'
+  });
+</script>
+```
+
 #### Example:
 
 ```html
-<h1 class='cascade-container'>Hello!</h1>
+<h1>Hello!</h1>
 
 <script>
   var element = document.getElementsByClassName('cascade-container')[0];
@@ -121,6 +149,25 @@ var cascade = new Cascade(element).flow({
 });
 ```
 
+You can also call `flow()` on an element that already has children nodes of any kind and they'll be animated as well:
+
+```html
+<div class='container'>
+  <div>Element One</div>
+  <div>Element Two</div>
+  <div>Element Three</div>
+  <div>Element Four</div>
+</div>
+
+<script>
+  var element = document.getElementsByClassName('container')[0];
+  var cascade = new Cascade(element);
+  cascade.flow({
+    should_fragment: false,
+    should_append_target_class: false
+  });
+```
+
 ### Usage of `fragment()`
 
 `fragment()` will split and wrap your text, but not animate it. Just want to style each letter in an interesting way? Want a vanilla javascript replacement for lettering.js? This is it. `fragment()` accepts all the same options as `flow()`, but only the following will be applied:
@@ -137,7 +184,7 @@ You can then call
 ```javascript
 cascade.flow({
   should_fragment: false
-})
+});
 ```
 
 When you're ready for some cool animations.
