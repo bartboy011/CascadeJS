@@ -61,32 +61,32 @@ Then call `flow()` with any or none of the following options:
 
 ```javascript
 cascade.flow({
-  tag_name: 'span',
-  class_prefix: 'cascade char',
+  tagName: 'span',
+  classPrefix: 'cascade char',
   effect: 'fadeUp',
-  total_time: 0.5,
+  totalTime: 0.5,
   duration: 1,
-  should_fragment: true,
-  should_append_target_class: true,
-  target_class: 'cascade-container'
+  shouldFragment: true,
+  shouldAppendTargetClass: true,
+  targetClass: 'cascade-container'
 });
 ```
 
-`tag_name:` - The tag that will wrap each character, ie `<span>A</span>`. Defaults to 'span'.
+`tagName:` - The tag that will wrap each character, ie `<span>A</span>`. Defaults to 'span'.
 
-`class_prefix:` - The class(es) to be added to the tags, with an increasing number appended at the end, ie `<span class="cascade char1">A</span>`. Defaults to 'cascade char'.
+`classPrefix:` - The class(es) to be added to the tags, with an increasing number appended at the end, ie `<span class="cascade char1">A</span>`. Defaults to 'cascade char'.
 
 `effect:` - The class name that adds the animation. In this default, 'fadeUp' uses a keyframe animation to fade in text while utilizing translateY to slide it up. Defaults to 'fadeUp'.
 
-`total_time:` - The amount of time in seconds as a float/integer from the first letter beginning it's animation to the last letter beginning it's animation. Defaults to `0.5`.
+`totalTime:` - The amount of time in seconds as a float/integer from the first letter beginning it's animation to the last letter beginning it's animation. Defaults to `0.5`.
 
 `duration:` - How long each letter's animation lasts. If you'd rather specify this in your CSS, just leave this option empty. Defaults to `null` and doesn't add this styling.
 
-`should_fragment:` - If you've previously called `fragment()` on this node, set this option to false otherwise the fragmentation will run again and throw an error. Defaults to true.
+`shouldFragment:` - If you've previously called `fragment()` on this node, set this option to false otherwise the fragmentation will run again and throw an error. Defaults to true.
 
-`should_append_target_class` - Defaults to true, will append a class to the target element after fragmenting.
+`shouldAppendTargetClass` - Defaults to true, will append a class to the target element after fragmenting.
 
-`target_class` - The class to be appended to the target element. Defaults to 'cascade-container'. Note: if you've already added the class to the element that you'd like appended, CascadeJS will skip the appending. Example:
+`targetClass` - The class to be appended to the target element. Defaults to 'cascade-container'. Note: if you've already added the class to the element that you'd like appended, CascadeJS will skip the appending. Example:
 
 ```html
 <!-- This element will have a class appended to it -->
@@ -96,7 +96,7 @@ cascade.flow({
   var element = document.getElementsByTagName('h1')[0];
   var cascade = new Cascade(element);
   cascade.flow({
-    target_class: 'cascade-container'
+    targetClass: 'cascade-container'
   });
 </script>
 
@@ -107,7 +107,7 @@ cascade.flow({
   var element = document.getElementsByTagName('h1')[0];
   var cascade = new Cascade(element);
   cascade.flow({
-    target_class: 'cascade-container'
+    targetClass: 'cascade-container'
   });
 </script>
 ```
@@ -120,7 +120,7 @@ cascade.flow({
 <script>
   var element = document.getElementsByClassName('cascade-container')[0];
   cascade = new Cascade(element).flow({
-    total_time: 2,
+    totalTime: 2,
     duration: 1.5
   })
 </script>
@@ -144,7 +144,7 @@ Use Animate.css? Try this:
 ```javascript
 var element = document.getElementsByClassName('cascade-container')[0];
 var cascade = new Cascade(element).flow({
-  class_prefix: 'animated char',
+  classPrefix: 'animated char',
   effect: 'bounceInLeft'
 });
 ```
@@ -163,8 +163,8 @@ You can also call `flow()` on an element that already has children nodes of any 
   var element = document.getElementsByClassName('container')[0];
   var cascade = new Cascade(element);
   cascade.flow({
-    should_fragment: false,
-    should_append_target_class: false
+    shouldFragment: false,
+    shouldAppendTargetClass: false
   });
 ```
 
@@ -174,8 +174,8 @@ You can also call `flow()` on an element that already has children nodes of any 
 
 ```javascript
 var cascade = new Cascade(element).fragment({
-  tag_name: 'span',
-  class_prefix: 'cascade char'
+  tagName: 'span',
+  classPrefix: 'cascade char'
 });
 ```
 
@@ -183,7 +183,7 @@ You can then call
 
 ```javascript
 cascade.flow({
-  should_fragment: false
+  shouldFragment: false
 });
 ```
 
