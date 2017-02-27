@@ -4,15 +4,18 @@ CascadeJS makes it simple to add cascading animations to individual letters or e
 
 ## Installation
 
+Installation is easy, you have three options:
+
+```bash
+npm install cascadejs
+bower install cascadejs
+```
+
+or just download from GitHub. Then:
+
 ```html
 <link href='stylesheet' type='text/css' href='cascade.min.css' />
 <script type='text/javascript' src='cascade.min.js' />
-```
-
-or
-
-```bash
-bower install cascadejs
 ```
 
 ## Quick Start
