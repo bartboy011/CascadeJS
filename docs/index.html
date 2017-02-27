@@ -1,14 +1,289 @@
-<img src="cascadejs-logo.png" />
-<h1>
-  <div>
-    Hello!
-  </div>
-</h1>
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>CascadeJS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="cascade.js"></script>
+        <link rel="stylesheet" href="css/styles.css">
+        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atelier-dune-light.min.css">-->
+        <script src="js/cascade.js"></script>
 
-<script>
-   new Cascade(document.getElementsByTagName('h1')[0]).flow({
-    shouldFragment: false
+        <!--[if lt IE 9]>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
+      <header grid>
+        <div column="m-10 +m-1" grid="column">
+          <div>
+            <h1>CascadeJS</h1>
+            <h3>Create cascading effects with ease.</h3>
+          </div>
+        </div>
+        <script>
+          var element = document.getElementsByTagName('h1')[0];
+          new Cascade(element).flow({
+            effect: 'fadeDown'
+          });
+        </script>
+      </header>
+      <main container grid>
+        <aside id="sidebar" column="m-3">
+          <h2>CascadeJS</h2>
+          <ul>
+            <li>
+              <a href="#installation" underline>Installation</a>
+              <ul>
+                <li>
+                  <a href="#quick-start" underline>Quick Start</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#usage" underline>Usage</a>
+              <ul>
+                <li>
+                  <a href="#flow-usage" underline>Usage of Flow()</a>
+                </li>
+                <li>
+                  <a href="#fragment-usage" underline>Usage of Fragment()</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#examples" underline>Examples</a>
+            </li>
+          </ul>
+        </aside>
+        <article column="m-9 +m-3">
+          <section>
+            <h1>Introduction</h1>
+            <p>
+              CascadeJS makes it simple to add cascading animations to individual letters or elements, using only vanilla javascript.
+            </p>
+          </section>
+          <section id="installation">
+            <h1>Installation</h1>
+            <p>
+              Installation is easy, you have three options:
+            </p>
+            <pre>
+<code>npm install cascadejs</code>
+<code>bower install cascadejs</code></pre>
+            <p>
+              or just download from GitHub. Then:
+            </p>
+
+<pre><code class="html">&lt;link href='stylesheet' type='text/css' href='cascade.min.css' /&gt;
+&lt;script type='text/javascript' src='cascade.min.js' /&gt;</code></pre>
+            <h3 id="quick-start">Quick start</h3>
+            <p>
+              CascadeJS comes with default settings, so as long as you've included both the JS and CSS files, it will work right out of the box. Here's an example usage:
+            </p>
+            <aside grid style="margin-left: 0;margin-right: 0;">
+              <div class="code-example" id="example-1" column="m-10 +m-1">
+                <script>
+                  function exampleOne() {
+                    var exampleOne = document.getElementById('example-1');
+                    if (exampleOne.getElementsByTagName('h1').length > 0) {
+                      for(var i = 0; i < exampleOne.getElementsByTagName('h1').length; i++) {
+                        var thisHeader = exampleOne.getElementsByTagName('h1')[i];
+                        thisHeader.parentNode.removeChild(thisHeader);
+                      }
+                    }
+                    var button = exampleOne.getElementsByTagName('button')[0];
+                    var header = document.createElement('h1');
+                    var text = document.createTextNode('Ooooohhhh fancy.');
+                    header.appendChild(text);
+                    exampleOne.insertBefore(header, button);
+                    new Cascade(header).flow({
+                      effect: 'fadeDown'
+                    });
+                  }
+
+                  exampleOne();
+                </script>
+                <button onclick="exampleOne()">Run</button>
+
+<pre><code class="html">&lt;link href='stylesheet' type='text/css' href='cascade.css' /&gt;
+&lt;script type='text/javascript' src='cascade.js' /&gt;
+
+&lt;h1&gt;Ooooohhhh, fancy.&lt;/h1&gt;
+
+&lt;script&gt;
+  var element = document.getElementsByTagName('h1')[0];
+  var cascade = new Cascade(element).flow();
+&lt;/script&gt;</code></pre>
+
+              </div>
+            </aside>
+          </section>
+          <section id="usage">
+            <h1>Usage</h1>
+            <p>
+              CascadeJS works by reading a line of text, splitting that text into spans around each character, and then adding animations to each span (by default). The splitting is modeled after charming.js, a vanilla javascript version of Lettering.js. Cascade requires an element be passed in on initialization:
+            </p>
+
+<pre><code class="javascript">var cascade = new Cascade(element);</code></pre>
+
+            <p>
+              Cascade has two methods that can be called:
+            </p>
+
+<pre><code class="javascript">var cascade = new Cascade(element);
+cascade.fragment();
+cascade.flow();</code></pre>
+
+          <p>
+            Calling <font class="code">fragment()</font> will split the text without adding the animations, and must be called on an element with only a text node for a child. Calling <font class="code">flow()</font> will first fragment the text, and then animate all children elements in a cascade.
+          </p>
+          </section>
+          <section id="flow-usage">
+            <h3 id="flow-usage">Usage of <font class="code">flow()</font></h3>
+
+            <p>
+              Initialize Cascade with an element:
+            </p>
+
+<pre><code class="javascript">var cascade = new Cascade(element);</code></pre>
+
+            <p>
+              Then call <font class='code'>flow()</font> with any or none of the following options:
+            </p>
+
+<pre><code class="javascript">cascade.flow({
+  tagName: 'span',
+  classPrefix: 'cascade char',
+  effect: 'fadeUp',
+  totalTime: 0.5,
+  duration: 1,
+  shouldFragment: true,
+  shouldAppendTargetClass: true,
+  targetClass: 'cascade-container'
+});</code></pre>
+
+            <p>
+              <font class='code'>tagName:</font> - The tag that will wrap each character, ie <font class='code'>&lt;span&gt;A&lt;/span&gt;</font>. Defaults to 'span'.
+            </p>
+
+            <p>
+              <font class='code'>classPrefix:</font> - The class(es) to be added to the tags, with an increasing number appended at the end, ie <font class='code'>&lt;span class=&quot;cascade char1&quot;&gt;A&lt;/span&gt;</font>. Defaults to 'cascade char'.
+            </p>
+
+            <p>
+              <font class='code'>effect:</font> - The class name that adds the animation. In this default, 'fadeUp' uses a keyframe animation to fade in text while utilizing translateY to slide it up. Defaults to 'fadeUp'.</br>
+            </p>
+
+            <p>
+              <font class='code'>totalTime:</font> - The amount of time in seconds as a float/integer from the first letter beginning it's animation to the last letter beginning it's animation. Defaults to <font class='code'>0.5</font>.
+            </p>
+
+            <p>
+              <font class='code'>duration:</font> - How long each letter's animation lasts. If you'd rather specify this in your CSS, just leave this option empty. Defaults to <font class='code'>null</font> and doesn't add this styling.
+            </p>
+
+            <p>
+              <font class='code'>shouldFragment:</font> - If you've previously called <font class='code'>fragment()</font> on this node, set this option to false otherwise the fragmentation will run again and throw an error. Defaults to true.
+            </p>
+
+            <p>
+              <font class='code'>shouldAppendTargetClass:</font> - Defaults to true, will append a class to the target element after fragmenting.
+            </p>
+
+            <p>
+              <font class='code'>targetClass:</font> - The class to be appended to the target element. Defaults to 'cascade-container'. Note: if you've already added the class to the element that you'd like appended, CascadeJS will skip the appending. Example:
+            </p>
+
+<pre><code class="html">&lt;!-- This element will have a class appended to it --&gt;
+&lt;h1 class='text-center'&gt;Hello!&lt;/h1&gt;
+
+&lt;script&gt;
+  var element = document.getElementsByTagName('h1')[0];
+  var cascade = new Cascade(element);
+  cascade.flow({
+    targetClass: 'cascade-container'
   });
-</script>
+&lt;/script&gt;
+
+&lt;!-- This element will NOT have a class appended --&gt;
+&lt;h1 class='text-center cascade-container'&gt;Hello!&lt;/h1&gt;
+
+&lt;script&gt;
+  var element = document.getElementsByTagName('h1')[0];
+  var cascade = new Cascade(element);
+  cascade.flow({
+    targetClass: 'cascade-container'
+  });
+&lt;/script&gt;</code></pre>
+          </section>
+
+          <section id="fragment-usage">
+            <h3 id="fragment-usage">Usage of <font class="code">fragment()</font></h3>
+
+            <p>
+              <font class='code'>fragment()</font> will split and wrap your text, but not animate it. Just want to style each letter in an interesting way? Want a vanilla javascript replacement for lettering.js? This is it. <font class='code'>fragment()</font> accepts all the same options as <font class='code'>flow()</font> , but only the following will be applied, while the rest will be stored in the object for when <font class='code'>flow()</font> is called:
+            </p>
+
+<pre><code class="javascript">var cascade = new Cascade(element).fragment({
+  tagName: 'span',
+  classPrefix: 'cascade char'
+});</code></pre>
+
+            <p>
+              You can then call:
+            </p>
+
+<pre><code class="javascript">cascade.flow({
+  shouldFragment: false
+});</code></pre>
+
+            <p>
+              when you're ready for some cool animations.
+            </p>
+          </section>
+
+          <section id="examples">
+            <h1>Examples</h1>
+<pre><code class="html">&lt;h1&gt;Hello!&lt;/h1&gt;
+
+&lt;script&gt;
+  var element = document.getElementsByClassName('cascade-container')[0];
+  cascade = new Cascade(element).flow({
+    totalTime: 2,
+    duration: 1.5
+  })
+&lt;/script&gt;</code></pre>
+
+            <p>
+              Produces:
+            </p>
+
+<pre><code class="html">&lt;h1 class='cascade-container'&gt;
+  &lt;span class='cascade char1 fadeUp' style='animation-delay: 0s; animation-duration: 1.5s;'&gt;H&lt;/span&gt;
+  &lt;span class='cascade char2 fadeUp' style='animation-delay: 0.4s; animation-duration: 1.5s;'&gt;e&lt;/span&gt;
+  &lt;span class='cascade char3 fadeUp' style='animation-delay: 0.8s; animation-duration: 1.5s;'&gt;l&lt;/span&gt;
+  &lt;span class='cascade char4 fadeUp' style='animation-delay: 1.2s; animation-duration: 1.5s;'&gt;l&lt;/span&gt;
+  &lt;span class='cascade char5 fadeUp' style='animation-delay: 1.6s; animation-duration: 1.5s;'&gt;o&lt;/span&gt;
+  &lt;span class='cascade char6 fadeUp' style='animation-delay: 2s; animation-duration: 1.5s;'&gt;!&lt;/span&gt;
+&lt;/h1&gt;</code></pre>
+
+            <p>
+              Use Animate.css? Try this:
+            </p>
+
+<pre><code class="javascript">var element = document.getElementsByClassName('cascade-container')[0];
+var cascade = new Cascade(element).flow({
+  classPrefix: 'animated char',
+  effect: 'bounceInLeft'
+});</code></pre>
+          </section>
+        </article>
+      </main>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+      <script src="js/extras.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

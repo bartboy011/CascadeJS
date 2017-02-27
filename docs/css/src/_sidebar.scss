@@ -1,0 +1,59 @@
+#sidebar {
+  padding-left: .375rem;
+  padding-top : 1.5rem;
+  background  : transparentize($purple, .7);
+  position    : absolute;
+  top         : 0;
+  left        : 0;
+  height      : 100vh;
+
+  h2 {
+    color : white;
+    margin: 0;
+  }
+
+  ul {
+    margin-top  : 0;
+    list-style  : none;
+    padding-left: 0;
+
+    li {
+      padding: 8px 0;
+
+      a {
+        color: white;
+      }
+
+      ul {
+        padding-left: 15px;
+
+        li {
+          padding  : 8px 0;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+[underline] {
+  position: relative;
+
+  &:hover {
+    &::after {
+      width     : 100%;
+      background: transparentize($purple, .6);
+    }
+  }
+
+  &::after {
+    content   : '';
+    position  : absolute;
+    left      : 0;
+    bottom    : -2px;
+    height    : 2px;
+    width     : 0;
+    background: transparentize($purple, .999);
+    transition: all .2s;
+  }
+}
