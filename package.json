@@ -1,6 +1,6 @@
 {
   "name": "cascadejs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "CascadeJS makes it simple to add cascading animations to individual letters in a text string, using only vanilla javascript, for dynamic typography.",
   "main": "cascade.js",
   "scripts": {
