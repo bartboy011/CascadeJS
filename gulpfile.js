@@ -26,7 +26,7 @@ gulp.task('sass', function () {
       .pipe(rename('cascade.min.css'))
       .pipe(gulp.dest('dist'))
       .pipe(livereload());
-      
+
     gulp.src('./src/css/cascade.scss')
       .pipe(plumber(plumberErrorHandler))
       .pipe(sass())
@@ -49,6 +49,20 @@ gulp.task('js', function () {
     .pipe(concat('cascade.js'))
     .pipe(minify())
     .pipe(gulp.dest('dist'))
+    .pipe(livereload());
+
+  gulp.src([
+    'src/js/initializers/*.js',
+    'src/js/cascade.js'
+  ])
+    .pipe(plumber(plumberErrorHandler))
+    .pipe(babel({
+      presets: [
+        ["es2015", { "modules": false }]
+      ]
+    }))
+    .pipe(concat('cascade.js'))
+    .pipe(gulp.dest('docs'))
     .pipe(livereload());
 });
 
