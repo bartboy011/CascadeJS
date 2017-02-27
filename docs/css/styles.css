@@ -1810,6 +1810,9 @@ table caption {
   top: 0;
   left: 0;
   height: 100vh; }
+  @media (max-width: 768px) {
+    #sidebar {
+      display: none; } }
   #sidebar h2 {
     color: white;
     margin: 0; }
@@ -1847,6 +1850,11 @@ table caption {
   border: 2px solid rgba(149, 18, 178, 0.3);
   border-radius: 3px;
   padding: .75rem; }
+  .code-example h1 {
+    font-size: 1.6rem; }
+    @media (min-width: 768px) {
+      .code-example h1 {
+        font-size: 2rem; } }
 
 header {
   height: 100vh;
@@ -1870,7 +1878,7 @@ header {
     color: white;
     text-align: center; }
   header h1 {
-    font-size: 3.5rem; }
+    font-size: 3.1rem; }
     @media (min-width: 600px) {
       header h1 {
         font-size: 5rem; } }

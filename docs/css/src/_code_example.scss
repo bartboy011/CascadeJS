@@ -2,4 +2,11 @@
   border       : 2px solid transparentize($purple, .7);
   border-radius: 3px;
   padding      : .75rem;
+
+  h1 {
+    font-size: 1.6rem;
+    @media(min-width:768px) {
+      font-size: 2rem;
+    }
+  }
 }

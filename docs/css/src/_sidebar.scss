@@ -6,6 +6,9 @@
   top         : 0;
   left        : 0;
   height      : 100vh;
+  @media(max-width: 768px) {
+    display: none;
+  }
 
   h2 {
     color : white;
