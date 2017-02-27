@@ -1,0 +1,55 @@
+/* Copyright 2017 Joshua Bartlett */
+/* Available under MIT License */
+.cascade-container * {
+  display: inline-block;
+  white-space: pre; }
+
+.cascade {
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s; }
+
+@-webkit-keyframes fadeUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none; } }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none; } }
+
+.fadeUp {
+  -webkit-animation-name: fadeUp;
+          animation-name: fadeUp; }
+
+@-webkit-keyframes doTheWave {
+  to {
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px); } }
+
+@keyframes doTheWave {
+  to {
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px); } }
+
+.doTheWave {
+  -webkit-animation-name: doTheWave;
+          animation-name: doTheWave;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite; }
