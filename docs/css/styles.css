@@ -1883,6 +1883,11 @@ header {
       header h1 {
         font-size: 5rem; } }
 
+a {
+  color: #9512b2; }
+  a:hover {
+    color: #6e0d84; }
+
 font.code {
   font-family: "Consolas", monospace; }
 
