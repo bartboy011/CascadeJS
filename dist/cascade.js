@@ -93,14 +93,9 @@ function Cascade(element, options) {
         effect = this.effect,
         duration = this.duration,
         i = -1;
-
-    console.log(array);
-
     while (i++ < array.length - 1) {
       var item = array[i],
           time = totalTime / (array.length - 1) * i;
-
-      console.log(item, effect, time, duration);
       animate(item, effect, time, duration);
     }
   }.bind(this);

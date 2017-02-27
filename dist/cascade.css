@@ -34,6 +34,30 @@
   -webkit-animation-name: fadeUp;
           animation-name: fadeUp; }
 
+@-webkit-keyframes fadeDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none; } }
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none; } }
+
+.fadeDown {
+  -webkit-animation-name: fadeDown;
+          animation-name: fadeDown; }
+
 @-webkit-keyframes doTheWave {
   to {
     -webkit-transform: translateY(100px);
