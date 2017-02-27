@@ -1,5 +1,7 @@
 # CascadeJS
 
+[Official Docs](https://bartboy011.github.io/CascadeJS/)
+
 CascadeJS makes it simple to add cascading animations to individual letters or elements, using only vanilla javascript.
 
 ## Installation
